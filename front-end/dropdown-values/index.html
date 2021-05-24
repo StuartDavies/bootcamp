@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown example</title>
+</head>
+
+<body>
+
+    <select id="options" onchange="optionChanged()" style="float: left">
+        <option value="ID0001">Option 1</option>
+        <option value="ID0002">Option 2</option>
+        <option value="ID0003">Option 3</option>
+        <option value="ID0004">Option 4</option>
+        <option value="ID0005">Option 5</option>
+    </select>
+
+    <span id="selectedOption" style="margin: 5px; padding: 2px; background-color: blueviolet; color: aliceblue;">Select an option...</span>
+
+</body>
+
+<script>
+
+    function optionChanged()
+    {
+        let dropdown = document.getElementById("options");
+        let selectedValue = dropdown.value;
+
+        let outputField = document.getElementById("selectedOption");
+        outputField.innerText = selectedValue;
+    }
+
+</script>
+
+</html>
