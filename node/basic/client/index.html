@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Node Example</title>
+</head>
+
+<body>
+
+    <input id="url" type="text" value="http://localhost:3000/api/test"></input>
+    <button onclick="callWebApi()">Call Web Api</button></span>
+    <div style="margin: 5px; padding: 5px; border: 1px dotted black; width: 200px; height: 100px; background-color: lightblue;" id="result"></div>
+
+</body>
+
+<script>
+
+    function callWebApi() {
+
+        let urlInput = document.getElementById("url");
+        let url = urlInput.value;
+
+        let resultDiv = document.getElementById("result");
+        resultDiv.innerText = "";
+
+        fetch(url, { 
+            method: 'GET',
+            mode: 'cors'       
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            else
+            {
+                throw response.statusText;
+            }
+        })
+        .then (data => {
+            resultDiv.innerText = "Hello Mr. " + data.lastName;
+        })
+        .catch((error) => {
+            resultDiv.innerText = "Error: " + error;
+        });        
+    }
+
+</script>
+
+</html>
