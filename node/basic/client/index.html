@@ -12,7 +12,7 @@
 
     <input id="url" type="text" value="http://localhost:3000/api/test"></input>
     <button onclick="callWebApi()">Call Web Api</button></span>
-    <div id="result" style="margin: 5px; padding: 5px; border: 1px dotted black; width: 200px; height: 100px; background-color: lightblue;"></div>
+    <div id="result" style="margin: 5px; padding: 5px; border: 1px dotted black; width: 300px; height: 200px; background-color: lightblue;"></div>
 
 </body>
 
@@ -40,7 +40,7 @@
             }
         })
         .then (data => {
-            resultDiv.innerText = "Hello Mr. " + data.lastName;
+            resultDiv.innerText = data;
         })
         .catch((error) => {
             resultDiv.innerText = "Error: " + error;

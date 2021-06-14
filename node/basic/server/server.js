@@ -14,10 +14,7 @@ const server = http.createServer((req, res) =>
     {
         res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" });
 
-        let data = { 
-            firstName: 'Shola', 
-            lastName: 'Quadri' 
-        };
+        let data = "Hey Shola!";
 
         res.end(JSON.stringify(data));
     }  
