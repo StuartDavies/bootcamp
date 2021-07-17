@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const apiRoute = require('./routes/apiRoute')
 
 const app = express();
 const port = 3000;
@@ -30,11 +31,6 @@ app.use(function (req, res, next)
     next();
 });
 
-app.get('/', (req, res) => 
-{
-    res.send('Hello World!')
-});
-  
 app.get('/api/scores', (req, res) => 
 {
     highScores = highScores.sort(function(a, b) 
@@ -51,6 +47,8 @@ app.post('/api/scores', (req, res) =>
     console.table(highScores);
     res.end();
 });
+
+app.use('/apiv2', apiRoute);
 
 app.listen(port, () => 
 {
