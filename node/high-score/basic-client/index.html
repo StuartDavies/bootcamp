@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>High Score Table</title>
+</head>
+
+<body>
+
+    <div>
+        <div><label>Name:</label><input id="name" type="text"></input></div>
+        <div><label>Score:</label><input id="score" type="text"></input></div>
+        <button onclick="submitScore()">Submit Score</button>
+    </div>
+
+    <table id="scores">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</body>
+
+<script>
+
+    refreshScoreTable();
+
+    function refreshScoreTable() {
+        fetch("http://localhost:3000/api/scores", {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache'
+        })
+        .then(response => response.json())
+        .then(data => {
+            const table = document.getElementById("scores");
+            const tableBody = table.getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = "";
+
+            data.forEach(element => {
+
+                const scoreRow = tableBody.insertRow();
+                scoreRow.innerHTML = `<td>${element.name}</td><td>${element.score}</td>`;
+            });
+        });
+    }
+
+    function submitScore() {
+        const nameField = document.getElementById("name");
+        const name = nameField.value;
+
+        const scoreField = document.getElementById("score");
+        const score = scoreField.value;
+
+        fetch("http://localhost:3000/api/scores", {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: {
+                'Content-Type': 'application/json'
+            }, body: JSON.stringify({ name: name, score: score })
+        })
+        .then(() => refreshScoreTable());
+    }
+
+</script>
+
+</html>
